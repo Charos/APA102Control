@@ -25,8 +25,7 @@ public class LED {
 
 
         }
-
-        }
+        return buffer;
     }
 
 

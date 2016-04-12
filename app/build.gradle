@@ -6,9 +6,14 @@ android {
     defaultConfig {
         applicationId "ch.bfh.ti.apa102control"
         minSdkVersion 19
-        targetSdkVersion 19
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+    }
+    //Point Gradle at the director where you want to root all of your native code
+    sourceSets.main{
+        jniLibs.srcDir 'src/main/libs'
+        jni.srcDirs=[]//Disable automatic ndk-build call
     }
     buildTypes {
         release {
@@ -25,4 +30,18 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
+}
+
+import org.apache.tools.ant.taskdefs.condition.Os
+
+//call regular ndk-build(.cmd) script for app directory
+task ndkBuild(type:Exec){
+    if(Os.isFamily(Os.FAMILY_WINDOWS)) {
+        commandLine 'ndk-build.cmd', '-C', file('src/main').absolutePath
+    }else{
+        commandLine 'ndk-build','-C',file('src/main').absolutePath
+    }
+}
+tasks.withType(JavaCompile){
+    compileTask->compileTask.dependsOn ndkBuild
 }
