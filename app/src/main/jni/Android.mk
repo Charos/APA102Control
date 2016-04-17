@@ -4,6 +4,6 @@ include $(CLEAR_VARS)
 
 LOCAL_LDLIBS    := -llog
 LOCAL_MODULE    := SPI
-LOCAL_SRC_FILES := spiLib.c
+LOCAL_SRC_FILES :=
 
 include $(BUILD_SHARED_LIBRARY)

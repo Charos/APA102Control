@@ -4,9 +4,9 @@
 #undef __cplusplus
 
 #include <stdio.h>
-#include <jni.h>>
-#include <linux/spi.h>
-#include "ch_bfh_ti_apa102control_SPI.h"
+#include <jni.h>
+//#include <linux/spi.h>
+// #include "ch_bfh_ti_apa102control_SPI.h"
 
 
 /* Define if we use the emulator */
