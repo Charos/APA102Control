@@ -9,6 +9,10 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        ndk {
+            moduleName "spi"
+        }
     }
     //Point Gradle at the director where you want to root all of your native code
     sourceSets.main{
@@ -40,7 +44,7 @@ task ndkBuild(type:Exec){
     if(Os.isFamily(Os.FAMILY_WINDOWS)) {
         commandLine 'ndk-build.cmd', '-C', file('src/main').absolutePath
     }else{
-        commandLine 'ndk-build','-C',file('src/main').absolutePath
+        commandLine '/home/student/Android/android-ndk-r10e/ndk-build','-C',file('src/main').absolutePath
     }
 }
 tasks.withType(JavaCompile){

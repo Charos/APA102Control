@@ -4,7 +4,18 @@
 #undef __cplusplus
 
 #include <stdio.h>
+#include <string.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+#include <linux/i2c.h>
+#include <memory.h>
+#include <malloc.h>
+
 #include <jni.h>
+
+#include <android/log.h>
 //#include <linux/spi.h>
 // #include "ch_bfh_ti_apa102control_SPI.h"
 
@@ -13,15 +24,17 @@
 #undef EMULATOR
 #define JNIEXPORT __attribute__ ((visibility ("default")))
 
-
+#define  LOG_TAG    "spi"
+#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
+#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
 /************************************************************************************************************************************/
 /* Open the spi device
 /************************************************************************************************************************************/
 
-JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_open(JNIEnv *env,jobject obj, jstring file)
+JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_SPI_open(JNIEnv *env,jobject obj, jstring file)
 {
-#ifndef EMULATOR
+    #ifndef EMULATOR
 
     /* File descriptor to spi-dev */
     int spi_fd;
@@ -53,7 +66,7 @@ JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_open(JNIEnv *env,jobject obj
 /* Read from the spi device																											*/
 /************************************************************************************************************************************/
 
-JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_read(JNIEnv * env, jobject obj, jint fileHander, jintArray bufArray, jint len)
+JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_SPI_read(JNIEnv * env, jobject obj, jint fileHander, jintArray bufArray, jint len)
 
 {
 #ifndef EMULATOR
@@ -121,7 +134,7 @@ JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_read(JNIEnv * env, jobject o
 /* Write to the spi device																											*/
 /************************************************************************************************************************************/
 
-JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_write(JNIEnv *env, jobject obj, jint fileHander, jintArray inJNIArray, jint len)
+JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_SPI_write(JNIEnv *env, jobject obj, jint fileHander, jintArray inJNIArray, jint len)
 {
 #ifndef EMULATOR
 
@@ -162,6 +175,7 @@ JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_write(JNIEnv *env, jobject o
     if (bytesWritten != len)
     {
         LOGE("Write to the spi device failed!");
+        LOGE("%d",bytesWritten);
         return -1;
     }
     return bytesWritten;
@@ -175,7 +189,7 @@ JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_write(JNIEnv *env, jobject o
 /* Close the i2c interface																										    */
 /************************************************************************************************************************************/
 
-JNIEXPORT void JNICALL Java_ch_bfh_ti_apa102control_close(JNIEnv *env, jobject obj, jint fileHander)
+JNIEXPORT void JNICALL Java_ch_bfh_ti_apa102control_SPI_close(JNIEnv *env, jobject obj, jint fileHander)
 {
 #ifndef EMULATOR
     close(fileHander);
