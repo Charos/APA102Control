@@ -8,85 +8,108 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="ch.bfh.ti.apa102control.MainActivity">
+    tools:context="ch.bfh.ti.apa102control.MainActivity"
+    android:focusable="false">
 
-    <SeekBar
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/speedBar"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/speedLabel"
-        android:max="100"
-        android:progress="10" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Farbe"
+        android:id="@+id/colorLabel"
+        android:layout_gravity="top|left"
+        android:layout_above="@+id/colorSlider"
+        android:layout_alignParentStart="true" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:text="Speed"
-        android:autoText="false"
-        android:clickable="false"
-        android:editable="false"
-        android:elegantTextHeight="false"
-        android:enabled="false"
-        android:focusable="false"
-        android:inputType="none"
-        android:id="@+id/speedLabel" />
-
-    <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
         android:id="@+id/nbrLEDS"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentLeft="false"
         android:hint="Anzahl LEDs"
-        android:numeric="integer" />
+        android:numeric="integer"
+        android:layout_weight="0.64"
+        android:layout_below="@+id/nbrLabel"
+        android:layout_alignParentStart="true"
+        android:text="10" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Modus"
+        android:id="@+id/modeLabel"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/nbrLabel"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false" />
 
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/radioGroup"
-        android:layout_below="@+id/nbrLEDS"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="25dp">
+        android:layout_gravity="right"
+        android:layout_below="@+id/modeLabel"
+        android:layout_alignStart="@+id/modeLabel"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false">
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rainbow"
-            android:id="@+id/radioButton"
+            android:text="Regenbogen"
+            android:id="@+id/rbRainbow"
             android:checked="true" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chasing"
-            android:id="@+id/radioButton2"
+            android:text="Durchlauf"
+            android:id="@+id/rbChasing"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Static"
-            android:id="@+id/radioButton3"
+            android:text="Statisch"
+            android:id="@+id/rbStatic"
             android:checked="false" />
 
     </RadioGroup>
 
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/speedBar"
+        android:max="100"
+        android:progress="10"
+        android:layout_below="@+id/speedLabel"
+        android:layout_alignParentStart="true" />
+
     <com.rtugeek.android.colorseekbar.ColorSeekBar
         android:id="@+id/colorSlider"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         app:color ="@array/material_colors"
         android:layout_height="45dp"
-        android:layout_above="@+id/speedLabel"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="22dp"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentBottom="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Speed"
+        android:id="@+id/speedLabel"
+        android:layout_gravity="bottom"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Anzahl LEDs"
+        android:id="@+id/nbrLabel"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

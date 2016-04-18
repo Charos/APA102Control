@@ -38,13 +38,23 @@ dependencies {
 }
 
 import org.apache.tools.ant.taskdefs.condition.Os
-
+def getNdkDir() {
+    if (System.env.ANDROID_NDK_ROOT != null)
+    return System.env.ANDROID_NDK_ROOT
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    def ndkdir = properties.getProperty('ndk.dir', null)
+    if (ndkdir == null)
+        throw new GradleException("NDK location not found. Define location with ndk.dir in the local.properties file or with an ANDROID_NDK_ROOT environment variable.")
+    return ndkdir
+    }
 //call regular ndk-build(.cmd) script for app directory
 task ndkBuild(type:Exec){
     if(Os.isFamily(Os.FAMILY_WINDOWS)) {
         commandLine 'ndk-build.cmd', '-C', file('src/main').absolutePath
     }else{
-        commandLine '/home/student/Android/android-ndk-r10e/ndk-build','-C',file('src/main').absolutePath
+        def ndkDir=getNdkDir();
+        commandLine "$ndkDir/ndk-build",'-C',file('src/main').absolutePath
     }
 }
 tasks.withType(JavaCompile){
