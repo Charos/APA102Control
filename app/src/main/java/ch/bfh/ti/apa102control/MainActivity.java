@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     SPI spiLED;
     int fileHandle;
-    int[] spiCommBuffer = new int[16];
+    int[] spiCommBuffer = new int[255];
 
     TextView textViewLEDCount;
     RadioGroup radioGroupMode;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
 
                     numLEDs = Integer.parseInt(textViewLEDCount.getText().toString());
-                   Toast.makeText(getBaseContext(), "Anzahl LEDs" + Integer.toString(numLEDs), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Anzahl LEDs" + Integer.toString(numLEDs), Toast.LENGTH_SHORT).show();
                 }
 
                 return false;
@@ -87,14 +87,14 @@ public class MainActivity extends AppCompatActivity {
         radioGroupMode.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(checkedId==R.id.rbStatic){
+                if (checkedId == R.id.rbStatic) {
                     colorBar.setVisibility(View.VISIBLE);
                     speedBar.setEnabled(false);
-                }else if(checkedId==R.id.rbChasing){
+                } else if (checkedId == R.id.rbChasing) {
                     colorBar.setVisibility(View.INVISIBLE);
                     speedBar.setEnabled(true);
 
-                }else if(checkedId==R.id.rbRainbow){
+                } else if (checkedId == R.id.rbRainbow) {
                     colorBar.setVisibility(View.INVISIBLE);
                     speedBar.setEnabled(false);
 
@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         /*SPI Test*/
-       /* spiLED=new SPI();
-        fileHandle= spiLED.open("/dev/spi");
+        spiLED=new SPI();
+        fileHandle= spiLED.open("/dev/spidev1.0");
         spiCommBuffer[0]=0x00;
         spiCommBuffer[1]=0x00;
         spiCommBuffer[2]=0x00;
@@ -117,13 +117,37 @@ public class MainActivity extends AppCompatActivity {
         spiCommBuffer[7]=0x00;
         spiCommBuffer[8]=0xFF;
         spiCommBuffer[9]=0x00;
-        spiCommBuffer[10]=0x00;
-        spiCommBuffer[11]=0xFF;
+        spiCommBuffer[10]=0xFF;
+        spiCommBuffer[11]=0x00;
         spiCommBuffer[12]=0xFF;
-        spiCommBuffer[13]=0xFF;
-        spiCommBuffer[14]=0xFF;
+        spiCommBuffer[13]=0x00;
+        spiCommBuffer[14]=0x00;
         spiCommBuffer[15]=0xFF;
-        spiLED.write(fileHandle,spiCommBuffer,16);
-        spiLED.close(fileHandle);*/
+        spiCommBuffer[16]=0xFF;
+        spiCommBuffer[17]=0x00;
+        spiCommBuffer[18]=0x00;
+        spiCommBuffer[19]=0x00;
+        spiCommBuffer[20]=0xFF;
+        spiCommBuffer[21]=0x00;
+        spiCommBuffer[22]=0x00;
+        spiCommBuffer[23]=0x00;
+        spiCommBuffer[24]=0xC0;
+        spiCommBuffer[25]=0x00;
+        spiCommBuffer[26]=0x00;
+        spiCommBuffer[27]=0x00;
+        spiCommBuffer[28]=0xFF;
+        spiCommBuffer[29]=0x00;
+        spiCommBuffer[30]=0x00;
+        spiCommBuffer[31]=0x00;
+        spiCommBuffer[32]=0xFF;
+        spiCommBuffer[33]=0x00;
+        spiCommBuffer[34]=0x00;
+        spiCommBuffer[35]=0x00;
+        spiCommBuffer[36]=0xFF;
+        spiCommBuffer[37]=0xFF;
+        spiCommBuffer[38]=0xFF;
+        spiCommBuffer[39]=0xFF;
+        spiLED.write(fileHandle,spiCommBuffer,40);
+        spiLED.close(fileHandle);
     }
 }

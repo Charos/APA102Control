@@ -17,7 +17,7 @@
 
 #include <android/log.h>
 //#include <linux/spi.h>
-// #include "ch_bfh_ti_apa102control_SPI.h"
+#include "ch_bfh_ti_apa102control_SPI.h"
 
 
 /* Define if we use the emulator */
@@ -56,6 +56,7 @@ JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_SPI_open(JNIEnv *env,jobject
     (*env)->ReleaseStringUTFChars(env, file, str);
 
     spi_fd = open(fileName, O_RDWR);
+    LOGE("spi_fd: %d",spi_fd);
     return (jint) spi_fd;
 #else
     return 0;
@@ -189,9 +190,10 @@ JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_SPI_write(JNIEnv *env, jobje
 /* Close the i2c interface																										    */
 /************************************************************************************************************************************/
 
-JNIEXPORT void JNICALL Java_ch_bfh_ti_apa102control_SPI_close(JNIEnv *env, jobject obj, jint fileHander)
+JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_SPI_close(JNIEnv *env, jobject obj, jint fileHander)
 {
 #ifndef EMULATOR
     close(fileHander);
 #endif
+    return (jint)NULL;
 }
