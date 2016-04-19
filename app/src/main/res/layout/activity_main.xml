@@ -112,4 +112,23 @@
         android:id="@+id/nbrLabel"
         android:layout_alignParentStart="true" />
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Poti"
+        android:id="@+id/cbPoti"
+        android:layout_alignTop="@+id/radioGroup"
+        android:layout_alignEnd="@+id/speedBar"
+        android:checked="false"
+        android:enabled="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="HW"
+        android:id="@+id/hwLabel"
+        android:layout_above="@+id/cbPoti"
+        android:layout_alignStart="@+id/cbPoti" />
+
 </RelativeLayout>

@@ -491,6 +491,13 @@ public class ColorSeekBar extends View {
 
 
 	/**
+	 *Get the value of color bar
+	 * @return value
+	 */
+	public int getColorBarValue(){
+		return mColorBarValue;
+	}
+	/**
 	 * Set the value of color bar, if out of bounds , it will be 0 or maxValue;
 	 * @param value
      */
