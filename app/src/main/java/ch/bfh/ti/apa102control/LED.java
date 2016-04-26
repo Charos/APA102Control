@@ -3,6 +3,7 @@ package ch.bfh.ti.apa102control;
 import android.graphics.Color;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by micha on 05.04.16.
@@ -14,7 +15,7 @@ public class LED {
         this.color=color;
     }
 
-    static int[] LED2Buffer(ArrayList<LED> leds)
+    static int[] LED2Buffer(List<LED> leds)
     {
 
         int bufferSize=leds.size()*4+8;

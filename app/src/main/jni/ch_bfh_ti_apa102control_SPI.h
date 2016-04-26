@@ -26,10 +26,10 @@ JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_SPI_read
 /*
  * Class:     ch_bfh_ti_apa102control_SPI
  * Method:    write
- * Signature: (I[II)I
+ * Signature: (I[I)I
  */
 JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_SPI_write
-  (JNIEnv *, jobject, jint, jintArray, jint);
+  (JNIEnv *, jobject, jint, jintArray);
 
 /*
  * Class:     ch_bfh_ti_apa102control_SPI

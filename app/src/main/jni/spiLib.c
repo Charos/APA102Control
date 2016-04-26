@@ -135,20 +135,16 @@ JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_SPI_read(JNIEnv * env, jobje
 /* Write to the spi device																											*/
 /************************************************************************************************************************************/
 
-JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_SPI_write(JNIEnv *env, jobject obj, jint fileHander, jintArray inJNIArray, jint len)
+JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_SPI_write(JNIEnv *env, jobject obj, jint fileHander, jintArray inJNIArray)
 {
 #ifndef EMULATOR
+    /* Get the array length */
+    jsize length = (*env)->GetArrayLength(env, inJNIArray);
 
     jbyte *bytePtr;
-    jbyte spiCommBuffer[255];
+    jbyte spiCommBuffer[length];
     jint  i, bytesWritten;
 
-    /* Check for a valid array size */
-    if ((len <= 0) || (len > 255))
-    {
-        LOGE("spi: array size <= 0 | > 255");
-        return -1;
-    }
 
     /* Convert the incoming JNI jbyteArray to C's jbyte[] */
     jint *inCArray = (*env)->GetIntArrayElements(env, inJNIArray, NULL);
@@ -157,8 +153,7 @@ JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_SPI_write(JNIEnv *env, jobje
     if (NULL == inCArray)
         return (jint) NULL;
 
-    /* Get the array length */
-    jsize length = (*env)->GetArrayLength(env, inJNIArray);
+
 
     /* Get the spi data elements from the java array*/
     for (i=0; i<length; i++)
@@ -170,10 +165,10 @@ JNIEXPORT jint JNICALL Java_ch_bfh_ti_apa102control_SPI_write(JNIEnv *env, jobje
     (*env)->ReleaseIntArrayElements(env, inJNIArray, inCArray, 0);
 
     /* Write data to the spi device */
-    bytesWritten = write(fileHander, spiCommBuffer, len);
+    bytesWritten = write(fileHander, spiCommBuffer, length);
 
     /* Inform user if not all bytes are written */
-    if (bytesWritten != len)
+    if (bytesWritten != length)
     {
         LOGE("Write to the spi device failed!");
         LOGE("%d",bytesWritten);

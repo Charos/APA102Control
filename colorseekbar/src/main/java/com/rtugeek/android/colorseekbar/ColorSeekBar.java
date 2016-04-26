@@ -504,8 +504,13 @@ public class ColorSeekBar extends View {
 	public void setColorBarValue(int value) {
 		this.mColorBarValue = value;
 		invalidate();
+		float colorPosition = (float) mColorBarValue / mMaxValue * mBarWidth;
+
+		Paint colorPaint = new Paint();
+		colorPaint.setAntiAlias(true);
+		colorPaint.setColor(pickColor(colorPosition));
 		if(mOnColorChangeLister != null)
-			mOnColorChangeLister.onColorChangeListener(mColorBarValue, mAlphaBarValue,getColor());
+			mOnColorChangeLister.onColorChangeListener(mColorBarValue, mAlphaBarValue, getColor());
 	}
 
 	/**

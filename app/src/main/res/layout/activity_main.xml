@@ -22,27 +22,26 @@
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:ems="10"
+        android:ems="3"
         android:id="@+id/nbrLEDS"
         android:hint="Anzahl LEDs"
         android:numeric="integer"
         android:layout_weight="0.64"
         android:layout_below="@+id/nbrLabel"
         android:layout_alignParentStart="true"
-        android:text="10" />
+        android:text="10"
+        android:enabled="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Modus"
         android:id="@+id/modeLabel"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/nbrLabel"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentStart="false" />
+        android:layout_above="@+id/nbrLEDS"
+        android:layout_alignEnd="@+id/nbrLabel" />
 
     <RadioGroup
         android:layout_width="wrap_content"
@@ -59,6 +58,13 @@
             android:layout_height="wrap_content"
             android:text="Regenbogen"
             android:id="@+id/rbRainbow"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Statisch"
+            android:id="@+id/rbStatic"
             android:checked="true" />
 
         <RadioButton
@@ -68,20 +74,13 @@
             android:id="@+id/rbChasing"
             android:checked="false" />
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Statisch"
-            android:id="@+id/rbStatic"
-            android:checked="false" />
-
     </RadioGroup>
 
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/speedBar"
-        android:max="100"
+        android:max="360"
         android:progress="10"
         android:layout_below="@+id/speedLabel"
         android:layout_alignParentStart="true" />
@@ -130,5 +129,23 @@
         android:id="@+id/hwLabel"
         android:layout_above="@+id/cbPoti"
         android:layout_alignStart="@+id/cbPoti" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="An / Aus"
+        android:id="@+id/labelOnOff"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/radioGroup"
+        android:layout_marginStart="30dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:id="@+id/buttonStart"
+        android:layout_alignBottom="@+id/nbrLEDS"
+        android:layout_alignStart="@+id/labelOnOff" />
 
 </RelativeLayout>
